@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from "react";
-import { Text, View } from "react-native";
+import React from "react";
+import { View } from "react-native";
 import getUniqueID from "./util/getUniqueID";
 
 export function rootRenderRule(children, styles) {
@@ -15,7 +15,8 @@ export default class AstRenderer {
    * @param {Object.<string, function>} renderRules
    * @param {any} style
    */
-  constructor(renderRules, style) {
+  constructor(textProps, renderRules, style) {
+    this._textProps = textProps;
     this._renderRules = renderRules;
     this._style = style;
   }
@@ -49,14 +50,14 @@ export default class AstRenderer {
     parents.unshift(node);
 
     if (node.type === "text") {
-      return renderFunction(node, [], parentNodes, this._style);
+      return renderFunction(node, [], parentNodes, this._style, this._textProps);
     }
 
     const children = node.children.map(value => {
       return this.renderNode(value, parents);
     });
 
-    return renderFunction(node, children, parentNodes, this._style);
+    return renderFunction(node, children, parentNodes, this._style, this._textProps);
   };
 
   /**

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 import FitImage from 'react-native-fit-image';
@@ -16,9 +16,9 @@ const renderRules = {
     );
   },
 
-  textgroup: (node, children, parent, styles) => {
+  textgroup: (node, children, parent, styles, textProps) => {
     return (
-      <Text key={node.key} style={styles.text}>
+      <Text {...textProps} key={node.key} style={styles.text}>
         {children}
       </Text>
     );
@@ -179,7 +179,7 @@ const renderRules = {
     if (hasParents(parent, 'ordered_list')) {
       return (
         <View key={node.key} style={styles.listOrderedItem}>
-          <Text style={styles.listOrderedItemIcon}>{node.index + 1}{node.markup}</Text>
+          <Text style={styles.listOrderedItemIcon}>{node.index + 1}</Text>
           <View style={[styles.listItem]}>{children}</View>
         </View>
       );

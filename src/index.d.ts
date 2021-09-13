@@ -1,7 +1,7 @@
 // tslint:disable:max-classes-per-file
 import { MarkdownIt, Token } from 'markdown-it';
-import { ComponentType, ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ReactNode } from 'react';
+import { StyleSheet, TextProps, View } from 'react-native';
 
 export function applyStyle(children: any[], styles: any, type: string): any;
 
@@ -15,6 +15,7 @@ export type RenderFunction = (
   children: ReactNode[],
   parent: ReactNode,
   styles: any,
+  textProps: TextProps,
 ) => ReactNode;
 
 export interface RenderRules {
@@ -77,6 +78,7 @@ export interface MarkdownProps {
   renderer?: AstRenderer;
   markdownit?: MarkdownIt;
   plugins?: Array<PluginContainer<any>>;
+  defaultTextProps?: Omit<TextProps, "style">,
 }
 
 type MarkdownStatic = React.ComponentType<MarkdownProps>;
