@@ -53,7 +53,7 @@ const renderRules = {
   // a
   link: (node, children, parent, styles) => {
     return (
-      <Text key={node.key} style={styles.link} onPress={() => openUrl(node.attributes.href)}>
+      <Text key={node.key} style={styles.link} onPress={() => openUrl(node.attributes.href)} onLongPress={() => {}}>
         {children}
       </Text>
     );
